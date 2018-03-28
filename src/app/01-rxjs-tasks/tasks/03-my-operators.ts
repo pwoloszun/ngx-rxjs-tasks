@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Observable';
+import { from } from 'rxjs/observable/from';
 
 import { myFromArray$, myInterval$ } from './01-my-observables';
 import { fullObserver } from '../utils';
@@ -52,6 +53,10 @@ function taskMap() {
   const interval$ = myInterval$(500);
   const mapped$ = myMap$(interval$, (i) => i * 10);
   mapped$.subscribe(fullObserver('taskMap'));
+
+  const names$ = myFromArray$(['bob', 'ed']);
+  const greetings$ = myMap$(names$, (name) => `Hello ${name}!`);
+  greetings$.subscribe(fullObserver('greetings'));
 }
 
 // TODO task: myFilter$
@@ -74,6 +79,10 @@ function taskTakeWhile() {
   const interval$ = myInterval$(500);
   const evens$ = myTakeWhile$(interval$, (i) => i < 10);
   evens$.subscribe(fullObserver('taskTakeWhile'));
+
+  myFromArray$(['bob', 'ben', 'bartosz', 'ed', 'beth']);
+  myTakeWhile$(interval$, (name) => name[0] === 'b')
+    .subscribe(fullObserver('taskTakeWhile names on B'));
 }
 
 // TODO task: myFirst$

@@ -62,28 +62,18 @@ function raceExample() {
 // "sledzi" obydwa streamy: login i logout
 // generuje: albo obiekt zalogowanego User'a albo null jesli User sie wylogowal
 function task1() {
-  const logIn$ = interval(2500).pipe(
-    take(5),
-    map(() => ({identifier: 'batman', lastLoginAt: (new Date()).toLocaleTimeString()}))
-  );
-  const logOut$ = interval(3200).pipe(
-    take(3),
-    map(() => 'LOGGED_OUT')
-  );
-
-  const currentUser$ = logIn$.pipe(
-    merge(logOut$)
-  );
-  currentUser$.subscribe(fullObserver('currentUser'));
 }
 
 // TODO task 2a:
-// implement userTransactions$
+// co delayInMs milisekund ->
+// emituj i-ty element tablicy transactions
 function userTransactions$(transactions: any[], delayInMs: number) {
-  return interval(delayInMs).pipe(
-    take(transactions.length),
-    map((i) => transactions[i])
-  );
+  return null;
+}
+
+function testUserTransactions() {
+  userTransactions$(transactionsArray('Bob'), 1200)
+    .subscribe(fullObserver('Bob transactions'));
 }
 
 function transactionsArray(tag) {
@@ -97,20 +87,13 @@ function transactionsArray(tag) {
 // 1) superQuickUser$, realizujacy transakcje co 0.25s
 // wynikowy stream atm$
 function task2() {
-  const slowUser$ = userTransactions$(transactionsArray('SLOW'), 1200);
-  const quickUser$ = userTransactions$(transactionsArray('QUICK'), 600);
-  const superQuickUser$ = userTransactions$(transactionsArray('SUPER QUICK'), 250);
-
-  const atm$ = slowUser$.pipe(
-    concat(superQuickUser$, quickUser$)
-  );
-  atm$.subscribe(fullObserver('atm'));
 }
 
 export function combineMultipleStreamsApp() {
   // mergeExample();
   // concatExample();
   // raceExample();
+  // testUserTransactions();
   // task1();
   // task2();
 }

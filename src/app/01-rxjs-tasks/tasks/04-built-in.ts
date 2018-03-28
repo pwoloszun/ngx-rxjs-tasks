@@ -26,36 +26,38 @@ import {
 import { fullObserver } from '../utils';
 
 // TODO example 1:
+// wez tablice imion ->
 // bierz imiona dopoki !== 'ADMIN' ->
 // przemapuj je na powitania: 'Hello X' ->
 // opoznij o 1.2s ->
 // wyniki zaloguj na konsoli
 function example1() {
   const names = ['bob', 'ed', 'kate', 'ADMIN', 'boby'];
-
-  const names$ = from(names);
-  names$.pipe(
-    takeWhile((name) => name.toUpperCase() !== 'ADMIN'),
-    map((name) => `Hello ${name}!`),
-    delay(1200)
-  ).subscribe(fullObserver('example1'));
+  // TODO
 }
 
 // TODO example 2:
-// co 1.2s wez i-te imie ->
-// przemapuj je na powitania: 'Hello X' ->
+// z talicy imion ->
+// bierz kolejne imie dopoki !== 'Admin'
+// przemapuj je na powitania: 'Hello NAME_PLACEHOLDER' ->
+// opoznij o 1.2s
 // wyniki zaloguj na konsoli
 function example2() {
   const names = ['bob', 'ed', 'kate', 'ADMIN', 'boby'];
-
-  const names$ = interval(1200);
-  names$.pipe(
-    map((i) => names[i]),
-    takeWhile((name) => name.toUpperCase() !== 'ADMIN'),
-    map((name) => `Hello ${name.toUpperCase()}!`)
-    // delay(1200),
-  ).subscribe(fullObserver('example2'));
+  // TODO
 }
+
+// TODO example 3:
+// co 1.2s ->
+// wez i-te imie ->
+// bierz kolejne imie dopoki !== 'Admin'
+// przemapuj je na powitania: 'Hello NAME_PLACEHOLDER' ->
+// wyniki zaloguj na konsoli
+function example3() {
+  const names = ['bob', 'ed', 'kate', 'ADMIN', 'boby'];
+  // TODO
+}
+
 
 // TODO task 1:
 // wygeneruj liczby z przedzialu [5..21] ->
@@ -92,16 +94,6 @@ function task3() {
 // wez (first) pierwszy taki slice, w ktorym pierwszy element slice'a > 30
 // wyniki zaloguj na konsoli
 function task4() {
-  interval(100).pipe(
-    take(110),
-    map((i) => i + 10),
-    bufferCount(25),
-    takeWhile((slice: number[]) => {
-      return slice[0] < 70;
-    }),
-    first((slice) => slice[0] > 30)
-    // first((x) => x > 10 && x < 90)
-  ).subscribe(fullObserver('task4'));
 }
 
 
@@ -113,25 +105,15 @@ function task4() {
 // buforuj wyniki i wydawaj je za kazdym razem gdy everyTwoSeconds$ cos emituje
 // wyniki zaloguj na konsoli
 function task5() {
-  const everyTwoSeconds$ = interval(2000);
-
-  interval(100).pipe(
-    map((i) => i * i),
-    skipWhile((n) => {
-      return (n / 100) < 100;
-    }),
-    takeWhile((n) => n < 20000),
-    buffer(everyTwoSeconds$)
-  ).subscribe(fullObserver('task5'));
 }
-
 
 export function builtInApp() {
   // example1();
   // example2();
+  // example3();
   // task1();
   // task2();
   // task3();
   // task4();
-  task5();
+  // task5();
 }

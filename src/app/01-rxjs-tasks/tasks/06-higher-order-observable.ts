@@ -27,7 +27,7 @@ function example2() {
   const userIds$ = of(123); // user IDs stream
   userIds$.pipe(
     map((userId) => fetchUser$(userId)),
-    mergeAll()
+    // TODO: "flatten" Observable
   ).subscribe(fullObserver('example2'));
 }
 
@@ -62,28 +62,29 @@ function example4() {
   ).subscribe(fullObserver('example4 zip'));
 }
 
-// TODO task 1
+// TODO:
+// + after delayInMs miliseconds
+// + returns Observable with single value: `RESULTS for '${query}'`
+// + side effect - logs: `[Searching]\t\t'${query}' results in: ${delayInMs}`
+function searchOnServer$(query: string, delayInMs: number) {
+  return null;
+}
 
+// TODO task 1
 function task1() {
   const search$ = searchOnServer$('batman', 1200);
   search$.subscribe(fullObserver('task1'));
 }
 
+// TODO:
+// user wpisuje w pole search kolejno queries
+// kazde kolejne query wpisuje losowa dlugosc czasu miedzy <1.8, 7> sekund
+// przed wpisaniem i-tego query, zaloguj: `Q: '${query}', within: ${ms}ms`
 function userInputs$(queries: string[]) {
-  let i = 1;
-  return from(queries).pipe(
-    mergeMap((query) => {
-      const ms = randomBetween(1800, 7000);
-      i++;
-      console.log(`Q: '${query}', within: ${ms}ms`);
-      return timer(ms).pipe(
-        // tap(() => ),
-        map(() => query)
-      );
-    })
-  );
+  return null;
 }
 
+// TODO task 2
 function task2() {
   const queries = [
     'doda', 'batman', 'how to become rich'
@@ -92,17 +93,10 @@ function task2() {
   inputs$.subscribe(fullObserver('task2'));
 }
 
-// TODO:
-// + after delayInMs miliseconds
-// + returns Observable with single value: `RESULTS for '${query}'`
-// + side effect - logs: `[Searching]\t\t'${query}' results in: ${delayInMs}`
-function searchOnServer$(query: string, delayInMs: number) {
-  return of(`RESULTS for '${query}'`).pipe(
-    tap(() => console.log(`[Searching]\t\t'${query}' results in: ${delayInMs}`)),
-    delay(delayInMs)
-  );
-}
-
+// TODO task 3
+// masz dane dwa rodzaje stream'ow: inputs$ oraz searchOnServer$('cos tam', 800)
+// stworz stream wynikowy, ktory wywola obydwa streamy ROWNOLEGLE
+// wyniki zaloguj na konsoli
 function task3() {
   const queries = [
     'doda', 'batman', 'how to become rich', 'rxjs', 'angular', 'react'
@@ -111,13 +105,15 @@ function task3() {
     tap((q) => console.log(`[usr input]\t\t'${q}'`))
   );
 
-  // TODO merge
-  const searchResults$ = inputs$.pipe(
-    mergeMap((q) => searchOnServer$(q, 800))
-  );
-  searchResults$.subscribe(fullObserver('MERGE_MAP'));
+  // TODO
 }
 
+// TODO task 4
+// masz dane dwa rodzaje stream'ow: inputs$ oraz searchOnServer$('cos tam', 800)
+// stworz stream wynikowy, ktory:
+// + NAJPIERW poczeka, az zakonczy sie wpisywanie tekstow
+// + I DOPIERO potem, dla kazdego wpisanego tekstu wykona wyszukiwanie
+// wyniki zaloguj na konsoli
 function task4() {
   const queries = [
     'doda', 'batman', 'how to become rich', 'rxjs', 'angular', 'react'
@@ -126,18 +122,15 @@ function task4() {
     tap((q) => console.log(`[usr input]\t\t'${q}'`))
   );
 
-  let i = queries.length;
-  // TODO concat
-  const searchResults$ = inputs$.pipe(
-    concatMap((q) => {
-      const ms = 800 * i;
-      i--;
-      return searchOnServer$(q, ms);
-    })
-  );
-  searchResults$.subscribe(fullObserver('CONCAT_MAP'));
+  // TODO
 }
 
+// TODO task 5
+// masz dane dwa rodzaje stream'ow: inputs$ oraz searchOnServer$('cos tam', 800)
+// stworz stream wynikowy, ktory:
+// + za kazdym razem, gdy zakonczy sie wpisywanie tekstow
+// + anuluje poprzednie wyszukiwanie na serwerze oraz wystartuje wyszukiwanie na serwerze dla nowo wpisanego tekstu
+// wyniki zaloguj na konsoli
 function task5() {
   const queries = [
     'doda', 'batman', 'how to become rich', 'rxjs', 'angular', 'react'
@@ -146,13 +139,17 @@ function task5() {
     tap((q) => console.log(`[usr input]\t\t'${q}'`))
   );
 
-  // TODO switch
-  const searchResults$ = inputs$.pipe(
-    switchMap((q) => searchOnServer$(q, 800))
-  );
-  searchResults$.subscribe(fullObserver('SWITCH_MAP'));
+  // TODO
 }
 
+// TODO task 6
+// masz dane dwa rodzaje stream'ow: inputs$ oraz searchOnServer$('cos tam', 800)
+// stworz stream wynikowy, ktory:
+// + za kazdym razem, gdy zakonczy sie wpisywanie tekstow
+// + sprawdzi czy poprzednie wyszukiwanie na serwerze zakonczone:
+//    + jesli tak - wowczas wystartuje wyszukiwanie na serwerze dla nowo wpisanego tekstu
+//    + jesli nie - zignoruje wpisany tekst
+// wyniki zaloguj na konsoli
 function task6() {
   const queries = [
     'doda', 'batman', 'how to become rich', 'rxjs', 'angular', 'react'
@@ -161,11 +158,7 @@ function task6() {
     tap((q) => console.log(`[usr input]\t\t'${q}'`))
   );
 
-  // TODO exhaust
-  const searchResults$ = inputs$.pipe(
-    exhaustMap((q) => searchOnServer$(q, 800))
-  );
-  searchResults$.subscribe(fullObserver('EXHAUST_MAP'));
+  // TODO
 }
 
 export function higherOrderObservablesApp() {

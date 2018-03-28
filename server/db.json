@@ -1,0 +1,55 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "userId": 100
+    },
+    {
+      "title": "post 0.20221838020364635",
+      "userId": 100,
+      "id": 5
+    },
+    {
+      "title": "post 0.6262496234701633",
+      "userId": 100,
+      "id": 6
+    },
+    {
+      "title": "post 0.8330195601199786",
+      "userId": 100,
+      "id": 7
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "bamans some comment",
+      "postId": 1,
+      "userId": 100
+    },
+    {
+      "id": 2,
+      "body": "bobek some comment",
+      "postId": 1,
+      "userId": 200
+    }
+  ],
+  "users": [
+    {
+      "id": 100,
+      "name": "Batman"
+    },
+    {
+      "id": 200,
+      "name": "Bob"
+    }
+  ],
+  "counters": [
+    {
+      "id": "asyncCounter",
+      "value": 5,
+      "updatedAt": null
+    }
+  ]
+}

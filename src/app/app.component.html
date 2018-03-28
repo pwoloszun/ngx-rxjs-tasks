@@ -1,0 +1,26 @@
+<div mdl-shadow="2">
+  <mdl-layout>
+    <mdl-layout-header>
+      <mdl-layout-header-row>
+        <mdl-layout-title>{{title}}</mdl-layout-title>
+        <mdl-layout-spacer></mdl-layout-spacer>
+        <nav class="mdl-navigation">
+          <a *ngFor="let link of mainMenuLinks"
+             [routerLink]="[link.url]"
+             class="mdl-navigation__link">{{link.text}}</a>
+        </nav>
+      </mdl-layout-header-row>
+    </mdl-layout-header>
+    <mdl-layout-drawer>
+      <mdl-layout-title>{{title}}</mdl-layout-title>
+      <nav class="mdl-navigation">
+        <a *ngFor="let link of mainMenuLinks"
+           [routerLink]="[link.url]"
+           class="mdl-navigation__link">{{link.text}}</a>
+      </nav>
+    </mdl-layout-drawer>
+    <mdl-layout-content>
+      <router-outlet></router-outlet>
+    </mdl-layout-content>
+  </mdl-layout>
+</div>

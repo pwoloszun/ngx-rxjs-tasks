@@ -20,10 +20,12 @@ import {
   bufferCount,
   first,
   catchError,
-  retry, skipWhile,
+  retry,
+  skipWhile,
 } from 'rxjs/operators';
 
 import { fullObserver } from '../utils';
+import { myFromArray$ } from './01-my-observables';
 
 // TODO example 1:
 // wez tablice imion ->
@@ -34,17 +36,11 @@ import { fullObserver } from '../utils';
 function example1() {
   const names = ['bob', 'ed', 'kate', 'ADMIN', 'boby'];
   // TODO
-}
-
-// TODO example 2:
-// z talicy imion ->
-// bierz kolejne imie dopoki !== 'Admin'
-// przemapuj je na powitania: 'Hello NAME_PLACEHOLDER' ->
-// opoznij o 1.2s
-// wyniki zaloguj na konsoli
-function example2() {
-  const names = ['bob', 'ed', 'kate', 'ADMIN', 'boby'];
-  // TODO
+  from(names).pipe(
+    takeWhile((name) => name !== 'ADMIN'),
+    map((name) => `Hello ${name}`),
+    delay(1200)
+  ).subscribe(fullObserver('example1'));
 }
 
 // TODO example 3:
@@ -71,7 +67,8 @@ function task1() {
 
 // TODO task 2:
 // stworz interwal co 0.8s ->
-// wez tylko 10 pierwszych wynikow ->
+// pomin pierwsza wygenerowana liczbe
+// z pozostalych, wez tylko 10 pierwszych wynikow ->
 // obliczaj iloczyn wszystkich dotychczas wygenerowanych liczb ->
 // kazdy posredni wynik zaloguj na konsoli ->
 // ostateczny iloczyn zaloguj na konsoli

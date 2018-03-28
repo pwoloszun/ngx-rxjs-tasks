@@ -1,15 +1,21 @@
 import { fullObserver } from '../utils';
-import { myInterval$ } from './01-my-observables';
+import { myInterval$, myTimeout$ } from './01-my-observables';
 
-function myUnsubscribe() {
-  const myInt$ = myInterval$(500);
-  const subscription = myInt$.subscribe(fullObserver('unsubscribe interval'));
+function example1() {
+  const timeout$ = myTimeout$(500);
+  const subscription = timeout$.subscribe(fullObserver('unsubscribe timeout'));
 
   setTimeout(() => {
     subscription.unsubscribe();
   }, 2200);
 }
 
+// TODO: impl unsubscribe to: myInterval$()
+function task1() {
+  // TODO
+}
+
 export function mySubscriptionsApp() {
-  // myUnsubscribe();
+  example1();
+  // task1();
 }

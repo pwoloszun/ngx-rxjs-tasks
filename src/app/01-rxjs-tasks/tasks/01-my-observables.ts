@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import { fullObserver } from '../utils';
 
-function myTimeout$(delayInMs: number): Observable<string> {
+export function myTimeout$(delayInMs: number): Observable<string> {
   return new Observable((observer) => {
     console.log('generating Observable');
     setTimeout(() => {
@@ -14,7 +13,7 @@ function myTimeout$(delayInMs: number): Observable<string> {
   });
 }
 
-function runMyTimeout() {
+function example1() {
   const timeout$ = myTimeout$(2000); // nothing happens
   // timeout$.subscribe((value: string) => console.log('[NEXT] timeout', value));
   // TODO 1b: next(), error(), complete()
@@ -24,23 +23,21 @@ function runMyTimeout() {
   // timeout$.subscribe(fullObserver('myTimeout'));
 }
 
-// TODO task: myInterval$
-export function myInterval$(delayInMs: number) {
-  return new Observable((observer) => {
-    let i = 0;
-    const intervalId = setInterval(() => {
-      observer.next(i);
-      i++;
-    }, delayInMs);
-    return () => { // unsubscribe fn
-      clearInterval(intervalId);
-    };
-  });
-}
 
 // TODO task: myFromArray$
+export function myFromArray$(items: any[]): Observable<any> {
+  return null; // TODO
+}
 
 // TODO task: myRange$
+export function myRange$(startValue: number, count: number): Observable<number> {
+  return null; // TODO
+}
+
+// TODO task: myInterval$
+export function myInterval$(delayInMs: number): Observable<number> {
+  return null; // TODO
+}
 
 // TODO task: myThrow$
 
@@ -54,9 +51,6 @@ export function myInterval$(delayInMs: number) {
 
 // TODO task: myTimer$
 
-// TODO task: myTimeout$
-
-
 export function myObservablesApp() {
-  // runMyTimeout();
+  example1();
 }

@@ -120,13 +120,9 @@ function myBufferCount$(source$, count) {
 }
 
 function taskBufferCount() {
-  const interval$ = myFromArray$([3, 4, 10]);
-  const evens$ = myReduce$(
-    interval$,
-    (accumulator, item) => accumulator * item,
-    -5
-  );
-  evens$.subscribe(fullObserver('taskReduce'));
+  const interval$ = myInterval$(100);
+  myBufferCount$(interval$, 25)
+    .subscribe(fullObserver('taskBufferCount'));
 }
 
 export function myOperatorsApp() {

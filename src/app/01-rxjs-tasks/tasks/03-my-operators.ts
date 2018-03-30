@@ -114,8 +114,19 @@ function taskReduce() {
   evens$.subscribe(fullObserver('taskReduce'));
 }
 
+// TODO myBufferCount$
 function myBufferCount$(source$, count) {
+  return null;
+}
 
+function taskBufferCount() {
+  const interval$ = myFromArray$([3, 4, 10]);
+  const evens$ = myReduce$(
+    interval$,
+    (accumulator, item) => accumulator * item,
+    -5
+  );
+  evens$.subscribe(fullObserver('taskReduce'));
 }
 
 export function myOperatorsApp() {
@@ -126,4 +137,5 @@ export function myOperatorsApp() {
   // taskTakeWhile();
   // taskFirst();
   // taskReduce();
+  // taskBufferCount();
 }

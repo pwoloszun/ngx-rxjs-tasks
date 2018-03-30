@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs/Observable';
-import { from } from 'rxjs/observable/from';
 
 import { myFromArray$, myInterval$ } from './01-my-observables';
 import { fullObserver } from '../utils';
@@ -68,6 +67,10 @@ function taskFilter() {
   const interval$ = myInterval$(500);
   const evens$ = myFilter$(interval$, (i) => i % 2 === 0);
   evens$.subscribe(fullObserver('taskFilter'));
+
+  const names$ = myFromArray$(['bob', 'ed', 'kate', 'ben']);
+  myFilter$(names$, (name) => name[0] === 'b')
+    .subscribe(fullObserver('filter names'));
 }
 
 // TODO task: myTakeWhile$
@@ -80,8 +83,8 @@ function taskTakeWhile() {
   const evens$ = myTakeWhile$(interval$, (i) => i < 10);
   evens$.subscribe(fullObserver('taskTakeWhile'));
 
-  myFromArray$(['bob', 'ben', 'bartosz', 'ed', 'beth']);
-  myTakeWhile$(interval$, (name) => name[0] === 'b')
+  const names$ = myFromArray$(['bob', 'ben', 'bartosz', 'ed', 'beth']);
+  myTakeWhile$(names$, (name) => name[0] === 'b')
     .subscribe(fullObserver('taskTakeWhile names on B'));
 }
 
@@ -97,14 +100,22 @@ function taskFirst() {
 }
 
 // TODO task: myReduce$
-function myReduce$(source$: Observable<any>, predicate: Function, startValue?: any): Observable<any> {
+function myReduce$(source$: Observable<any>, predicate: Function, startValue: any): Observable<any> {
   return null;
 }
 
 function taskReduce() {
   const interval$ = myFromArray$([3, 4, 10]);
-  const evens$ = myReduce$(interval$, (accumulator, item) => accumulator + item);
+  const evens$ = myReduce$(
+    interval$,
+    (accumulator, item) => accumulator * item,
+    -5
+  );
   evens$.subscribe(fullObserver('taskReduce'));
+}
+
+function myBufferCount$(source$, count) {
+
 }
 
 export function myOperatorsApp() {

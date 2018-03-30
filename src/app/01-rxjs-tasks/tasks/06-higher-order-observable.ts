@@ -8,11 +8,16 @@ import { concatMap, delay, exhaustMap, map, mergeAll, mergeMap, switchMap, take,
 import { fullObserver, items$, randomBetween } from '../utils';
 
 function example1() {
-  const numbers$ = items$([1, 2, 3, 4], 800);
-  const squaresHOO$ = numbers$.pipe(
-    map((i) => i * i) // TODO 1: return Observable
+  const btnClick$ = interval(600); // fake 'Download' btn clicks
+  const fetchData$ = of({id: 1, title: 'War & Peace'}).pipe( // fake data downloaded asynchronously
+    delay(1500)
   );
-  squaresHOO$.subscribe(fullObserver('HOO example1'));
+  const downloadOnBtnClickHOO$ = btnClick$.pipe(
+    map((i) => fetchData$),
+    mergeAll(),
+  );
+
+  downloadOnBtnClickHOO$.subscribe(fullObserver('qq'));
 
   // TODO 2: "flatten" stream of streams
 }

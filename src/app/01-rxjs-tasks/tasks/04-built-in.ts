@@ -9,12 +9,13 @@ import {
   map,
   filter,
   reduce,
+  scan,
   take,
+  takeLast,
   takeWhile,
   skip,
   delay,
   tap,
-  // TODO
   buffer,
   bufferTime,
   bufferCount,
@@ -25,7 +26,6 @@ import {
 } from 'rxjs/operators';
 
 import { fullObserver } from '../utils';
-import { myFromArray$ } from './01-my-observables';
 
 // TODO example 1:
 // wez tablice imion ->
@@ -70,14 +70,15 @@ function task1() {
 // pomin pierwsza wygenerowana liczbe
 // z pozostalych, wez tylko 10 pierwszych wynikow ->
 // obliczaj iloczyn wszystkich dotychczas wygenerowanych liczb ->
-// kazdy posredni wynik zaloguj na konsoli ->
-// ostateczny iloczyn zaloguj na konsoli
+// kazdy posredni wynik zaloguj na konsoli ("side effect")->
+// wez tylko ostatni obliczony wynik ->
+// ostatni iloczyn zaloguj na konsoli
 function task2() {
 }
 
 // TODO task 3:
 // co 1s generuj kolejna liczbe parzysta ->
-// bierz liczy dopoki (i < 20) ->
+// bierz liczby dopoki (i < 20) ->
 // oblicz sume wszystkich liczb ->
 // wynik zaloguj na konsoli
 function task3() {

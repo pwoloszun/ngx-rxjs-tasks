@@ -11,6 +11,7 @@ export class AppComponent {
   mainMenuLinks = [
     {text: 'Dashboard', url: '/'},
     {text: 'RxJS examples', url: '/rxjs-examples'},
+    {text: 'RxJS on UI', url: '/rxjs-on-ui'},
     {text: 'About', url: '/about'},
   ];
 }

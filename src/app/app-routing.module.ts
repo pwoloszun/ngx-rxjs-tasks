@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { ExamplesComponent } from './01-rxjs-tasks/examples/examples.component';
+import { RegistrationFormComponent } from './rxjs-ui-tasks/registration-form/registration-form.component';
 
 const appRoutes: Routes = [
   {
@@ -13,6 +14,10 @@ const appRoutes: Routes = [
   {
     path: 'rxjs-examples',
     component: ExamplesComponent,
+  },
+  {
+    path: 'rxjs-on-ui',
+    component: RegistrationFormComponent,
   },
   {
     path: 'about',

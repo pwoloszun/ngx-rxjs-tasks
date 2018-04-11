@@ -44,7 +44,7 @@ export class RegistrationFormComponent implements OnInit {
 
   // TODO: search()
   // simultaneously get values from both: firstNameControl & lastNameControl ->
-  // debounce received values pair due to 0.3sec ->
+  // debounce each received value due to 0.3sec ->
   // for every received value send search(query) request AND
   //    listen to all responses
   search() {

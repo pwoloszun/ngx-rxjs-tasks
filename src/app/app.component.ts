@@ -12,6 +12,7 @@ export class AppComponent {
     {text: 'Dashboard', url: '/'},
     {text: 'RxJS examples', url: '/rxjs-examples'},
     {text: 'RxJS on UI', url: '/rxjs-on-ui'},
+    {text: 'Complex task', url: '/complex-task'},
     {text: 'About', url: '/about'},
   ];
 }

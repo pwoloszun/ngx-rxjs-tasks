@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './core/page-not-found/page-not-found.comp
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { ExamplesComponent } from './01-rxjs-tasks/examples/examples.component';
 import { RegistrationFormComponent } from './rxjs-ui-tasks/registration-form/registration-form.component';
+import { ComplexTaskComponent } from './rxjs-ui-tasks/complex-task/complex-task.component';
 
 const appRoutes: Routes = [
   {
@@ -18,6 +19,10 @@ const appRoutes: Routes = [
   {
     path: 'rxjs-on-ui',
     component: RegistrationFormComponent,
+  },
+  {
+    path: 'complex-task',
+    component: ComplexTaskComponent,
   },
   {
     path: 'about',
